@@ -17,8 +17,12 @@ const mockOpeningHoursData = {
   "friday": [{ "type": "open", "value": 36000 }],
   "saturday": [
     {
+      "type": "open",
+      "value": 20000
+    },
+    {
       "type": "close",
-      "value": 3600
+      "value": 30000
     },
     {
       "type": "open",

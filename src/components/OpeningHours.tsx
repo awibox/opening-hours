@@ -1,19 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {daysOfWeek, getDayFromMonday, toUSAFormat} from '../utils';
 import './OpeningHours.css';
-
-// Utils
-const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
-const getDayFromMonday = (): number => {
-  const currentDay = new Date().getDay();
-  return currentDay === 0 ? 6 : currentDay - 1;
-}
-
-const toUSAFormat = (hours: number): string => {
-  let h = hours % 12;
-  if (h === 0) h = 12;
-  return h + (hours < 12 ? ' AM' : ' PM');
-}
 
 // Types
 type DaysOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
@@ -25,20 +12,20 @@ type OpeningHoursItemData = {
 
 type OpeningHoursItem = OpeningHoursItemData[] | []
 
-type Props = {
-  data: Record<DaysOfWeek, OpeningHoursItem>
-}
-
 type ItemOfArrayType = {
   name: string,
   value: string,
   today: boolean,
 }
 
+type Props = {
+  data: Record<DaysOfWeek, OpeningHoursItem>
+}
+
 // Component
 const OpeningHours = ({data}: Props) => {
   console.log('data', data)
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState<ItemOfArrayType[]>([])
   const getOpeningHoursString = (item: OpeningHoursItem): string => {
     if (item.length > 0) {
       const sortedItems = [...item].sort((a, b) => (a.value - b.value));
@@ -52,16 +39,16 @@ const OpeningHours = ({data}: Props) => {
         } else {
           if (open) {
             resultArray.push(
-              `${toUSAFormat(open / 60 / 60)} - ${toUSAFormat(sortedItems[i].value / 60/ 60)}`
+              `${toUSAFormat(open / 60 / 60)} - ${toUSAFormat(sortedItems[i].value / 60 / 60)}`
             );
             open = 0
           }
         }
       }
       console.log('resultArray', resultArray)
-      return resultArray.length > 0 ? resultArray.join(', ') : 'Closed';
+      return resultArray.length > 0 ? resultArray.join(', ') : '';
     }
-    return 'Closed';
+    return '';
   }
   useEffect(() => {
     const itemsArray: ItemOfArrayType[] = [];
@@ -73,11 +60,31 @@ const OpeningHours = ({data}: Props) => {
         today: daysOfWeek.indexOf(k) === getDayFromMonday()
       })
     }
-    console.log('itemsArray', itemsArray)
+    setItems(itemsArray);
   }, [data])
   return (
-    <div className="App">
-      test
+    <div className="OpeningHours">
+      <div className="OpeningHoursTitle">
+        <div className="OpeningHoursTitleIcon"/>
+        Opening hours
+      </div>
+      <div className="OpeningHoursItems">
+        {items.map((item) => (
+          <div key={item.name} className="OpeningHoursItem">
+            <div className="OpeningHoursItemDay">
+              {item.name}
+              {item.today && <div className="OpeningHoursItemToday">
+                today
+              </div>}
+            </div>
+            <div className="OpeningHoursItemHours">
+              {item.value ? item.value : <div className="OpeningHoursItemClosed">
+                Closed
+              </div>}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

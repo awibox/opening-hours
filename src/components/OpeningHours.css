@@ -1,0 +1,62 @@
+.OpeningHours {
+    background-color: #fff;
+    width: 325px;
+    box-sizing: border-box;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px #ddd;
+}
+
+.OpeningHoursTitle {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 800;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border-bottom: 1px solid #202125;
+    padding-bottom: 10px;
+}
+.OpeningHoursTitleIcon {
+    mask: url('../images/time.svg');
+    width: 21px;
+    height: 21px;
+    background-size: contain;
+    background-color: #A1A2A4;
+    margin-right: 10px;
+}
+.OpeningHoursItems {
+    display: flex;
+    flex-flow: column;
+}
+.OpeningHoursItem {
+    display: flex;
+    width: 100%;
+    flex-flow: row;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    padding: 7px 0;
+}
+.OpeningHoursItemDay {
+    width: 60%;
+    text-transform: capitalize;
+    font-weight: 500;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+.OpeningHoursItemToday {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #5BCB02;
+    margin-left: 12px;
+}
+.OpeningHoursItemHours {
+    width: 40%;
+    text-align: right;
+}
+.OpeningHoursItemClosed {
+    color: #A1A2A4;
+}
