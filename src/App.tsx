@@ -1,24 +1,53 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import OpeningHours from "./components/OpeningHours";
+
+const mockOpeningHoursData = {
+  "monday": [],
+  "tuesday": [
+    { "type": "open", "value": 36000 },
+    { "type": "close", "value": 64800 }
+  ],
+  "wednesday": [],
+  "thursday": [
+    { "type": "open", "value": 36000 },
+    { "type": "close", "value": 64800 }
+  ],
+  "friday": [{ "type": "open", "value": 36000 }],
+  "saturday": [
+    {
+      "type": "close",
+      "value": 3600
+    },
+    {
+      "type": "open",
+      "value": 32400
+    },
+    {
+      "type": "close",
+      "value": 39600
+    },
+    {
+      "type": "open",
+      "value": 57600
+    },
+    {
+      "type": "close",
+      "value": 82800
+    }
+  ],
+  "sunday": [
+    { "type": "close", "value": 3600 },
+    { "type": "open", "value": 43200 },
+    { "type": "close", "value": 75600 }
+  ],
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <OpeningHours data={mockOpeningHoursData} />
     </div>
   );
 }
