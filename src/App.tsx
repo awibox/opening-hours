@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import OpeningHours from "./components/OpeningHours";
 
 const mockOpeningHoursData = {
-  "monday": [],
+  "monday": [{
+    "type": "close",
+    "value": 82800
+  }],
   "tuesday": [
     { "type": "open", "value": 36000 },
     { "type": "close", "value": 64800 }
@@ -18,7 +20,7 @@ const mockOpeningHoursData = {
   "saturday": [
     {
       "type": "open",
-      "value": 20000
+      "value": 22000
     },
     {
       "type": "close",

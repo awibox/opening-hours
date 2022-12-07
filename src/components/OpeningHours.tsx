@@ -24,13 +24,15 @@ type Props = {
 
 // Component
 const OpeningHours = ({data}: Props) => {
-  console.log('data', data)
   const [items, setItems] = useState<ItemOfArrayType[]>([])
+  // Getting a string with the opening hours. Time complexity O(n).
   const getOpeningHoursString = (item: OpeningHoursItem): string => {
     if (item.length > 0) {
+      // Sorting in case the time entries are in the wrong order
       const sortedItems = [...item].sort((a, b) => (a.value - b.value));
+      // Support of the case with the work of the restaurant until the next day
       sortedItems.push({type: "close", value: 3600})
-      console.log('sortedItems', sortedItems)
+      // Solution with using a flags to improve performance from O(n^2) to O(n)
       const resultArray = [];
       let open = 0;
       for (let i = 0; i < sortedItems.length; i++) {
@@ -45,11 +47,11 @@ const OpeningHours = ({data}: Props) => {
           }
         }
       }
-      console.log('resultArray', resultArray)
-      return resultArray.length > 0 ? resultArray.join(', ') : '';
+      return resultArray.length > 0 ? resultArray.join('\r\n') : '';
     }
     return '';
   }
+  // Generating a new array for rendering when data changes. Time complexity O(n).
   useEffect(() => {
     const itemsArray: ItemOfArrayType[] = [];
     let k: keyof typeof data;
